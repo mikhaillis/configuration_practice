@@ -28,7 +28,7 @@ def parse_command(string: str) -> list[str]:
 
     if quote_char:
         raise ValueError(
-            f"Синтаксическая ошибка: незакрытая кавычка {quote_char}"
+            f"ошибка: незакрытая кавычка {quote_char}"
         )
 
     if cur_token:
