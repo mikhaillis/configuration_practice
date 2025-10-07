@@ -1,11 +1,14 @@
+import copy
 import getpass
 import sys
 
 from vfs import (
     CURRENT_PATH,
+    basename,
     decode_file_content,
     get_file_size,
     get_node_by_path,
+    get_parent_and_name,
     path_to_str,
 )
 
@@ -14,6 +17,7 @@ _TAIL_DEFAULT_LINES = 10
 _ARG_STEP = 2
 _FLAG_VALUE_OFFSET = 2
 _LS_SIZE_WIDTH = 8
+_CP_ARG_COUNT = 2
 
 commands_handlers = {}
 pre_arguments = {}
@@ -317,3 +321,54 @@ def tail(args: list[str]):
 
     for target in files:
         print_tail_file(target, n)
+
+
+def resolve_cp_destination(src: str, dst: str) -> str:
+    """Если dst — каталог, копируем внутрь с именем источника."""
+    try:
+        dst_node, _ = get_node_by_path(dst)
+    except ValueError:
+        return dst
+
+    if dst_node.get("type") == "dir":
+        return dst.rstrip("/") + "/" + basename(src)
+    return dst
+
+
+def copy_file_in_vfs(src: str, dst: str) -> None:
+    """Копирует файл внутри VFS только в оперативной памяти."""
+    try:
+        src_node, _ = get_node_by_path(src)
+    except ValueError as err:
+        raise ValueError(f"cp: {err}") from err
+
+    if src_node.get("type") != "file":
+        raise ValueError(
+            f"cp: {src}: копирование каталогов не поддерживается"
+        )
+
+    dst = resolve_cp_destination(src, dst)
+
+    try:
+        parent, name, _ = get_parent_and_name(dst)
+    except ValueError as err:
+        raise ValueError(f"cp: {err}") from err
+
+    existing = parent.get("children", {}).get(name)
+    if existing is not None and existing.get("type") == "dir":
+        raise ValueError(
+            f"cp: {dst}: нельзя перезаписать каталог файлом"
+        )
+
+    parent.setdefault("children", {})[name] = copy.deepcopy(src_node)
+
+
+@register("cp")
+def cp(args: list[str]):
+    """Копирование файла внутри VFS (только в памяти)."""
+    if len(args) != _CP_ARG_COUNT:
+        raise ValueError(
+            "cp: использование: cp <источник> <приемник>"
+        )
+
+    copy_file_in_vfs(args[0], args[1])
