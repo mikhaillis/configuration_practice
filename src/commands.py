@@ -1,5 +1,6 @@
 import sys
 commands_handlers = {}
+pre_arguments = {}
 
 def register(name: str):
     """декоратор добавления функции в dict хэндлеров"""
@@ -18,8 +19,17 @@ def execute_command(name:str, args: list[str]):
         raise ValueError(f"Команда не найдена: {name}")
     else:
         func(args)
-    
 
+def set_config(args: dict):
+    for arg in args:
+        pre_arguments[arg] = args[arg]
+
+
+@register("conf-dump")
+def init_config(args) -> None:
+    print("стартовые аргументы:")
+    for arg in pre_arguments:
+        print(f"аргумент {arg}: {pre_arguments[arg]}")
 
 @register("ls")
 def ls(args: list[str]):
