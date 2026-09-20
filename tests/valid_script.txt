@@ -1,0 +1,4 @@
+conf-dump
+ls src
+cd src
+exit
