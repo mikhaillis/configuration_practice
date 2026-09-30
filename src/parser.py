@@ -4,7 +4,7 @@ def parse_command(string: str) -> list[str]:
     Поддерживает аргументы внутри двойных и одинарных кавычек.
     """
     if not string:
-        return
+        return []
 
     tokens = []
     cur_token = []
