@@ -1,0 +1,14 @@
+/,dir,
+/docs,dir,
+/docs/work,dir,
+/docs/work/projects,dir,
+/docs/work/projects/report.txt,file,TGluZSAxOiBpbnRybwpMaW5lIDI6IG1ldGhvZHMKTGluZSAzOiByZXN1bHRzCkxpbmUgNDogY29uY2x1c2lvbgpMaW5lIDU6IGZ1dHVyZSB3b3Jr
+/docs/personal,dir,
+/docs/personal/notes.txt,file,bm90ZSBvbmUKbm90ZSB0d28Kbm90ZSB0aHJlZQ==
+/images,dir,
+/images/logo.png,file,iVBORw0KGgo=
+/file1.txt,file,SGVsbG8gd29ybGQKdGhpcyBpcyBhIHRlc3QgZmlsZQp3aXRoIHNldmVyYWwgbGluZXMKb2YgdGV4dCBjb250ZW50CmZvciB3YyBhbmQgdGFpbA==
+/alpha.txt,file,YWxwaGE=
+/.hidden,file,aGlkZGVuIGNvbnRlbnQ=
+/.config,dir,
+/.config/settings.txt,file,a2V5PXZhbHVl

@@ -1,0 +1,14 @@
+conf-dump
+ls
+cd docs
+ls
+cd work/projects
+ls
+cd ../..
+ls personal
+cd /images
+ls
+cd /
+ls -a
+cd nonexistent_folder
+exit
