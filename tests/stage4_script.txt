@@ -1,0 +1,23 @@
+conf-dump
+ls
+ls -a
+ls -l
+ls -lh
+ls -lah
+ls -a /
+cd docs
+ls
+ls -la
+cd work/projects
+ls -l
+wc report.txt
+tail report.txt
+tail -n 3 report.txt
+tail -n2 report.txt
+cd /
+who
+wc file1.txt
+wc nonexistent.txt
+cd file1.txt
+cd nonexistent_folder
+tail -n abc file1.txt

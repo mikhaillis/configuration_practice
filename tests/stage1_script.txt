@@ -1,0 +1,8 @@
+ls
+cd docs
+ls "quoted arg"
+ls 'single quoted'
+unknown_command
+cd too many args
+ls "unclosed
+exit

@@ -9,5 +9,6 @@ ls personal
 cd /images
 ls
 cd /
+ls -a
 cd nonexistent_folder
 exit
