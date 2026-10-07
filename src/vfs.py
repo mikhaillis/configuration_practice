@@ -4,6 +4,7 @@ import sys
 
 VFS_TREE = {}
 CURRENT_PATH = []
+CONST = 3
 
 
 def ensure_dir_node(node: dict, name: str) -> dict:
@@ -37,7 +38,7 @@ def insert_path(root: dict, path: str, obj_type: str, content: str) -> None:
 
 def parse_vfs_row(row: list[str]) -> tuple[str, str, str]:
     """Проверяет строку CSV и возвращает path, type, content."""
-    if len(row) != 3:
+    if len(row) != CONST:
         print("Ошибка загрузки VFS: неверный формат строки в CSV.")
         sys.exit(1)
 

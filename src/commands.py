@@ -1,6 +1,9 @@
 import getpass
 import sys
 
+CONSTANT1 = 1024
+CONSTANT2 = 2
+
 from vfs import (
     CURRENT_PATH,
     decode_file_content,
@@ -41,7 +44,7 @@ def human_size(num: int) -> str:
     units = ["B", "K", "M", "G", "T"]
     size = float(num)
     for unit in units:
-        if size < 1024 or unit == units[-1]:
+        if size < CONSTANT1 or unit == units[-1]:
             if unit == "B":
                 return f"{int(size)}B"
             return f"{size:.1f}{unit}"
@@ -270,7 +273,7 @@ def parse_tail_args(args: list[str]) -> tuple[int, list[str]]:
         arg = args[i]
         if arg == "-n" and i + 1 < len(args):
             n = parse_tail_n(args[i + 1])
-            i += 2
+            i += CONSTANT2
         elif arg.startswith("-n") and len(arg) > 2:
             n = parse_tail_n(arg[2:])
             i += 1

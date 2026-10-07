@@ -21,7 +21,6 @@ echo === Этап 4: wc / who / tail ===
 echo who
 echo wc file1.txt
 echo tail -n 2 file1.txt
-echo exit
 ) | python src\main.py --vfs tests\vfs_deep.csv
 
 pause
