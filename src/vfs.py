@@ -149,3 +149,43 @@ def path_to_str(path_parts: list[str]) -> str:
     if path_parts:
         return "/" + "/".join(path_parts)
     return "/"
+
+
+def get_parent_and_name(
+    target_path: str,
+) -> tuple[dict, str, list[str]]:
+    """
+    Возвращает родительский каталог, имя узла и полный путь.
+    Нужен для создания и копирования файлов в памяти.
+    """
+    calc_path = resolve_path(target_path)
+    if not calc_path:
+        raise ValueError(f"Некорректный путь: {target_path}")
+
+    name = calc_path[-1]
+    parent_path = calc_path[:-1]
+    parent = VFS_TREE
+
+    for segment in parent_path:
+        if parent.get("type") != "dir":
+            raise ValueError(f"Не является директорией: {segment}")
+        children = parent.get("children", {})
+        if segment not in children:
+            raise ValueError(
+                f"Нет такого файла или каталога: {target_path}"
+            )
+        parent = children[segment]
+
+    if parent.get("type") != "dir":
+        joined = "/".join(parent_path)
+        raise ValueError(f"Не является директорией: {joined}")
+
+    return parent, name, calc_path
+
+
+def basename(path: str) -> str:
+    """Возвращает имя файла из пути."""
+    parts = [p for p in path.split("/") if p]
+    if parts:
+        return parts[-1]
+    return path

@@ -1,0 +1,16 @@
+conf-dump
+ls
+cp file1.txt file1_copy.txt
+ls
+wc file1_copy.txt
+tail -n 2 file1_copy.txt
+cp alpha.txt docs/personal/
+ls docs/personal
+wc docs/personal/alpha.txt
+cp file1.txt /docs/work/projects/file1_backup.txt
+ls /docs/work/projects
+cp file1.txt alpha.txt
+wc alpha.txt
+cp
+cp only_one_arg
+cp missing.txt copy.txt
